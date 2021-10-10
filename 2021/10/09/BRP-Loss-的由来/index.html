@@ -79,16 +79,22 @@
 
 
 
-<meta name="description" content="记录推荐系统的学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="向宗义的博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="BPR Loss​    BPR Loss 作为推荐系统中常用的 loss，我在之前却只知道形式而不知道它的由来。在读完论文 BPR: Bayesian Personalized Ranking from Implicit Feedback 后恍然大悟，故在这里记录自己的理解。 ​    先放上 BPR Loss 的形式以及里面符号的含义：$${Loss}{bpr}&#x3D;\sum{(u,i,j)\in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BRP Loss 的由来">
+<meta property="og:url" content="http://example.com/2021/10/09/BRP-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/index.html">
 <meta property="og:site_name" content="向宗义的博客">
-<meta property="og:description" content="记录推荐系统的学习">
+<meta property="og:description" content="BPR Loss​    BPR Loss 作为推荐系统中常用的 loss，我在之前却只知道形式而不知道它的由来。在读完论文 BPR: Bayesian Personalized Ranking from Implicit Feedback 后恍然大悟，故在这里记录自己的理解。 ​    先放上 BPR Loss 的形式以及里面符号的含义：$${Loss}{bpr}&#x3D;\sum{(u,i,j)\in">
 <meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/10/img/image-20211009165701143.png">
+<meta property="og:image" content="http://example.com/2021/10/img/image-20211009185756496.png">
+<meta property="og:image" content="http://example.com/2021/10/img/image-20211010153633843.png">
+<meta property="article:published_time" content="2021-10-09T02:36:01.000Z">
+<meta property="article:modified_time" content="2021-10-10T08:33:21.902Z">
 <meta property="article:author" content="向宗义">
 <meta property="article:tag" content="推荐系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/10/img/image-20211009165701143.png">
 
 
 
@@ -118,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/"/>
+  <link rel="canonical" href="http://example.com/2021/10/09/BRP-Loss-的由来/"/>
 
 
 
 
 
-  <title>向宗义的博客</title>
+  <title>BRP Loss 的由来 | 向宗义的博客</title>
   
 
 
@@ -143,8 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,9 +222,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -249,9 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/10/09/BRP-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/" itemprop="url">BRP Loss 的由来</a></h1>
+          <h1 class="post-title" itemprop="name headline">BRP Loss 的由来</h1>
         
 
         <div class="post-meta">
@@ -301,9 +304,7 @@
       
 
       
-        
-          
-            <h1 id="BPR-Loss"><a href="#BPR-Loss" class="headerlink" title="BPR Loss"></a>BPR Loss</h1><p>​    BPR Loss 作为推荐系统中常用的 loss，我在之前却只知道形式而不知道它的由来。在读完论文 <a target="_blank" rel="noopener" href="https://arxiv.org/ftp/arxiv/papers/1205/1205.2618.pdf">BPR: Bayesian Personalized Ranking from Implicit Feedback</a> 后恍然大悟，故在这里记录自己的理解。</p>
+        <h1 id="BPR-Loss"><a href="#BPR-Loss" class="headerlink" title="BPR Loss"></a>BPR Loss</h1><p>​    BPR Loss 作为推荐系统中常用的 loss，我在之前却只知道形式而不知道它的由来。在读完论文 <a target="_blank" rel="noopener" href="https://arxiv.org/ftp/arxiv/papers/1205/1205.2618.pdf">BPR: Bayesian Personalized Ranking from Implicit Feedback</a> 后恍然大悟，故在这里记录自己的理解。</p>
 <p>​    先放上 BPR Loss 的形式以及里面符号的含义：<br>$$<br>{Loss}<em>{bpr}=\sum</em>{(u,i,j)\in O}-\ln\sigma(\hat{y}<em>{ui}-\hat{y}</em>{uj})+\lambda \Vert {\Theta} \Vert_2^2<br>$$</p>
 <p>​    其中 $\ O=\left{(u,i,j)|(u,i) \in {R}^{+},(u,j) \in {R}^{-} \right}  $，$\ R^{+}$表示的是 user 与 item 有交互的集合，$\ R^{-}$ 表示 user 与 item 未交互的集合，例如张三买了新键盘，但没买显示器，那么 $\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$。</p>
 <p>​    $\ \sigma$ 是sigmoid函数，形式为 $\ sigmoid(x)=\frac{1}{1+exp(-x)}$, 函数图形如下图显示，可以发现值域在0和1之间，并且为单调递增函数。</p>
@@ -345,8 +346,6 @@
 <p>[4] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26614750">一文搞懂极大似然估计</a></p>
 <p>[5] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32685118">贝叶斯眼里的正则化</a></p>
 
-          
-        
       
     </div>
     
@@ -363,144 +362,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/08/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="向宗义的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/10/08/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-08T19:35:04+08:00">
-                2021-10-08
-              </time>
+              <a href="/2021/10/08/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -510,10 +393,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -521,6 +405,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -541,8 +429,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -584,6 +481,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BPR-Loss"><span class="nav-number">1.</span> <span class="nav-text">BPR Loss</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PRELIMINARIES"><span class="nav-number">2.</span> <span class="nav-text">PRELIMINARIES</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implicit-Feedback"><span class="nav-number">2.1.</span> <span class="nav-text">Implicit Feedback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Personalized-Ranking"><span class="nav-number">2.2.</span> <span class="nav-text">Personalized Ranking</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%B1%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC-BPR-Loss"><span class="nav-number">3.</span> <span class="nav-text">由贝叶斯公式推导 BPR Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0-P-i-gt-u-j-Theta"><span class="nav-number">3.1.</span> <span class="nav-text">似然函数 $P(i{&gt;}_{u}j|\Theta)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E9%AA%8C%E6%A6%82%E7%8E%87-P-Theta"><span class="nav-number">3.2.</span> <span class="nav-text">先验概率 $\ P(\Theta) $</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BPR-Loss-%E7%9A%84%E6%8E%A8%E5%87%BA"><span class="nav-number">3.3.</span> <span class="nav-text">BPR  Loss 的推出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -717,6 +630,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

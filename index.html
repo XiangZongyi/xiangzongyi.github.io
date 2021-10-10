@@ -343,14 +343,14 @@
 <script type="math/tex; mode=display">
 {Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2</script><p>​    其中 $\ O=\left\{(u,i,j)|(u,i) \in {R}^{+},(u,j) \in {R}^{-} \right\}$ ，$\ R^{+}$ 表示的是 user 与 item 有交互的集合，$\ R^{-}$ 表示 user 与 item 未交互的集合，例如张三买了新键盘，但没买显示器，那么 $\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$。</p>
 <p>​    $\ \sigma$ 是sigmoid函数，形式为 $\ sigmoid(x)=\frac{1}{1+exp(-x)}$, 函数图形如下图显示，可以发现值域在0和1之间，并且为单调递增函数。</p>
-<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/../public/images/image-20211009165701143.png" alt="image-20211009165701143"></p>
-<p>​                                                                           <em>Figure 1: Sigmoid 的图像</em> </p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211009165701143.png" alt="image-20211009165701143"></p>
+<p>​                                                                 <em>Figure 1: Sigmoid 的图像</em> </p>
 <p>​    $\hat{y}_{ui}$ 表示模型最后给出的用户 u 对 物品 i 的预测评分，$\ \hat{y}_{uj}$ 同理。$\ \lambda$ 是正则项系数，该系数是一个超参数 (hyperparameter)，在训练前人为设定，$\ \Theta$ 是待训练的参数，在推荐系统中一般指 user 和 item 的 embedding 参数。</p>
 <p>​    介绍完 BPR Loss 的形式，接下来就从 BPR 的论文入手，看看这个 Loss 是怎么来的。</p>
 <h1 id="2-PRELIMINARIES"><a href="#2-PRELIMINARIES" class="headerlink" title="2. PRELIMINARIES"></a>2. PRELIMINARIES</h1><p>​    这篇论文的大致内容都可以从题目中反应出来，题目中包含的信息也能分为三部分，Bayesian,  Personalized Ranking 和 Implicit Feedback。其中核</p>
 <h3 id="2-1-Implicit-Feedback"><a href="#2-1-Implicit-Feedback" class="headerlink" title="2.1 Implicit Feedback"></a>2.1 Implicit Feedback</h3><p>​    在推荐系统中有显式反馈 (Explicit Feedback) 和隐式反馈 (Implicit Feedback)。举例子来说，张三去看电影，他看完了  《肖申克的救赎》，并在豆瓣上给电影打分为4分（5分制)，然后他又看了电影《后天》，并打分为1分，其中的4分和1分分别表示张三对《肖申克的救赎》和《后天》的显示反馈。</p>
 <p>​    而在文章最开始举的例子中，张三买了键盘，但没买显示器，那么张三对键盘的”打分“为1，对显示器的”打分“为0，这就是隐式反馈。</p>
-<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/../public/images/image-20211009185756496-16338695785261.png" alt="image-20211009185756496"></p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211009185756496.png" alt="image-20211009185756496"></p>
 <p><em>Figure 2: 隐式反馈的”打分“表示。在左图中，”?” 表示 user 与 item 未交互，”+” 表示 user 与 item 有交互。相应的，根据隐式反馈的”打分“，交互的”打分“为1，未交互的”打分“为0。 (图片来源 <a target="_blank" rel="noopener" href="https://arxiv.org/ftp/arxiv/papers/1205/1205.2618.pdf">BPR: Bayesian Personalized Ranking from Implicit Feedback</a> )</em></p>
 <p>​    在隐式反馈中有个问题，就是只有正样本才能被观察到，剩下的未被观察的（未交互的）数据混合着潜在的正样本和负样本。如果忽略掉未被观察到的样本，那么典型的机器学习方法将学不到任何东西（因为其不能区分正负样本）。所以一个策略是从未被观察到的数据中，采取一部分的样本作为负样本，该方法被称作负采样 (Negative Sampling)。</p>
 <p>​    再引用张三买键盘的例子，我们有$\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$，其中张三买了键盘，张三与键盘有交互，故集合 $\ R^{+}$ 为观察到的正样本；张三没有购买显示器，张三与显示器没有交互，故集合 $\ R^{-}$ 为未观察到的样本，从 $ R^{-}$ 中采样出来的样本，被称为负样本。负样本的采集方法也是推荐系统中的一个重要研究分支，感兴趣的朋友们可以看看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/387378387">小白必看：一文读懂推荐系统负采样</a>。</p>
@@ -383,7 +383,7 @@ BPR-OPT &=min \ -ln(P(i{>}_{u}j|\Theta)*P(\Theta)) \\
 &=min \ \sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2
 \end{align}</script><p>公式（13）眼熟吗，我再放上 BPR Loss: $ {Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2$ ，当令 $\lambda=\frac{1}{2\lambda_{\Theta}} $，BPR-OPT就变为了 BPR Loss。</p>
 <p>​    在推导最后的 BPR Loss 时我发现了论文中的一个小错误，论文中给出的结果是</p>
-<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/../public/images/image-20211010153633843.png" alt="image-20211010153633843"></p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211010153633843.png" alt="image-20211010153633843"></p>
 <p>​                                          Figure 3: BPR 论文中对 BPR-OPT 的推导，其中 $ P(\theta) \sim N(0,\lambda_{\Theta}I)$</p>
 <p>但按照我们推导的来，最后正则项化系数 $\lambda=\frac{1}{2\lambda_{\Theta}}$，可在论文的推导中正则项系数 $\lambda=\lambda_{\Theta}$。不过因为直接使用最后一步的推导，且正则项系数为超参数，由人为设定，最终结果不受影响。</p>
 <h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p>​    BPR Loss 来源于 BPR 论文中优化策略，论文中策略</p>

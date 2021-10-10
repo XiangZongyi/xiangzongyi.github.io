@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<link rel="dns-prefetch" href="//cdn.bootcss.com" />
+<link rel="dns-prefetch" href="//cdn.mathjax.org" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="记录推荐系统的学习">
+<meta property="og:type" content="website">
+<meta property="og:title" content="向宗义的博客">
+<meta property="og:url" content="http://xiangzongyi.github.io/index.html">
+<meta property="og:site_name" content="向宗义的博客">
+<meta property="og:description" content="记录推荐系统的学习">
+<meta property="og:locale">
+<meta property="article:author" content="向宗义">
+<meta property="article:tag" content="推荐系统">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiangzongyi.github.io/"/>
+
+
+
+
+
+  <title>向宗义的博客</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">向宗义的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="向宗义的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/" itemprop="url">BPR Loss 的由来</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-09T10:36:01+08:00">
+                2021-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-BPR-Loss"><a href="#1-BPR-Loss" class="headerlink" title="1. BPR Loss"></a>1. BPR Loss</h1><p>​    BPR Loss 作为推荐系统中常用的 loss，我在之前却只知道形式而不知道它的由来。在读完论文 <a target="_blank" rel="noopener" href="https://arxiv.org/ftp/arxiv/papers/1205/1205.2618.pdf">BPR: Bayesian Personalized Ranking from Implicit Feedback</a> 后恍然大悟，故在这里记录自己的理解。</p>
+<p>​    先放上 BPR Loss 的形式以及里面符号的含义：</p>
+<script type="math/tex; mode=display">
+{Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2</script><p>​    其中 $\ O=\left\{(u,i,j)|(u,i) \in {R}^{+},(u,j) \in {R}^{-} \right\}$ ，$\ R^{+}$ 表示的是 user 与 item 有交互的集合，$\ R^{-}$ 表示 user 与 item 未交互的集合，例如张三买了新键盘，但没买显示器，那么 $\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$。</p>
+<p>​    $\ \sigma$ 是sigmoid函数，形式为 $\ sigmoid(x)=\frac{1}{1+exp(-x)}$, 函数图形如下图显示，可以发现值域在0和1之间，并且为单调递增函数。</p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/../public/images/image-20211009165701143.png" alt="image-20211009165701143"></p>
+<p>​                                                                           <em>Figure 1: Sigmoid 的图像</em> </p>
+<p>​    $\hat{y}_{ui}$ 表示模型最后给出的用户 u 对 物品 i 的预测评分，$\ \hat{y}_{uj}$ 同理。$\ \lambda$ 是正则项系数，该系数是一个超参数 (hyperparameter)，在训练前人为设定，$\ \Theta$ 是待训练的参数，在推荐系统中一般指 user 和 item 的 embedding 参数。</p>
+<p>​    介绍完 BPR Loss 的形式，接下来就从 BPR 的论文入手，看看这个 Loss 是怎么来的。</p>
+<h1 id="2-PRELIMINARIES"><a href="#2-PRELIMINARIES" class="headerlink" title="2. PRELIMINARIES"></a>2. PRELIMINARIES</h1><p>​    这篇论文的大致内容都可以从题目中反应出来，题目中包含的信息也能分为三部分，Bayesian,  Personalized Ranking 和 Implicit Feedback。其中核</p>
+<h3 id="2-1-Implicit-Feedback"><a href="#2-1-Implicit-Feedback" class="headerlink" title="2.1 Implicit Feedback"></a>2.1 Implicit Feedback</h3><p>​    在推荐系统中有显式反馈 (Explicit Feedback) 和隐式反馈 (Implicit Feedback)。举例子来说，张三去看电影，他看完了  《肖申克的救赎》，并在豆瓣上给电影打分为4分（5分制)，然后他又看了电影《后天》，并打分为1分，其中的4分和1分分别表示张三对《肖申克的救赎》和《后天》的显示反馈。</p>
+<p>​    而在文章最开始举的例子中，张三买了键盘，但没买显示器，那么张三对键盘的”打分“为1，对显示器的”打分“为0，这就是隐式反馈。</p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/../public/images/image-20211009185756496-16338695785261.png" alt="image-20211009185756496"></p>
+<p><em>Figure 2: 隐式反馈的”打分“表示。在左图中，”?” 表示 user 与 item 未交互，”+” 表示 user 与 item 有交互。相应的，根据隐式反馈的”打分“，交互的”打分“为1，未交互的”打分“为0。 (图片来源 <a target="_blank" rel="noopener" href="https://arxiv.org/ftp/arxiv/papers/1205/1205.2618.pdf">BPR: Bayesian Personalized Ranking from Implicit Feedback</a> )</em></p>
+<p>​    在隐式反馈中有个问题，就是只有正样本才能被观察到，剩下的未被观察的（未交互的）数据混合着潜在的正样本和负样本。如果忽略掉未被观察到的样本，那么典型的机器学习方法将学不到任何东西（因为其不能区分正负样本）。所以一个策略是从未被观察到的数据中，采取一部分的样本作为负样本，该方法被称作负采样 (Negative Sampling)。</p>
+<p>​    再引用张三买键盘的例子，我们有$\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$，其中张三买了键盘，张三与键盘有交互，故集合 $\ R^{+}$ 为观察到的正样本；张三没有购买显示器，张三与显示器没有交互，故集合 $\ R^{-}$ 为未观察到的样本，从 $ R^{-}$ 中采样出来的样本，被称为负样本。负样本的采集方法也是推荐系统中的一个重要研究分支，感兴趣的朋友们可以看看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/387378387">小白必看：一文读懂推荐系统负采样</a>。</p>
+<h3 id="2-2-Personalized-Ranking"><a href="#2-2-Personalized-Ranking" class="headerlink" title="2.2 Personalized Ranking"></a>2.2 Personalized Ranking</h3><p>​    讲完了隐式反馈，接下来讲讲什么是个性化排序 (Personalized Ranking) 。假设张三是一个程序员，他尤其喜欢电子设备，这时给了他四个物品：钢笔，键盘，显示器，拖把，其中张三对这四个物品的喜欢程度排序为：键盘&gt;显示器&gt;钢笔&gt;拖把。</p>
+<p>​    如果将张三定义为 u, 钢笔，键盘，显示器和拖把分别定义为 i1, i2, i3, i4 。那么张三对这几个物品的偏好程度可以写为 $i2 {&gt;}_{u}i3{&gt;}_{u}i1{&gt;}_u{i4}$， 其中 $\ {&gt;}_{u} $ 表示在用户 u 下，对各个物品的偏好程度。这种对特定的用户，有着特定的物品偏好排序，就叫做 personalized ranking。</p>
+<h1 id="3-由贝叶斯公式推导-BPR-Loss"><a href="#3-由贝叶斯公式推导-BPR-Loss" class="headerlink" title="3. 由贝叶斯公式推导 BPR Loss"></a>3. 由贝叶斯公式推导 BPR Loss</h1><p>​    接下来就进入核心部分，也是能将 BPR Loss 推导出来的部分。给定一个用户 u ，物品  i, j 且$ (u,i) \in {R}^{+},(u,j) \in {R}^{-} $。那么我们对于要训练的参数 $ \Theta $ ，我们希望能最大化 $  P(\Theta|i {&gt;}_{u}j)$，为什么要最大化这个概率函数呢？我们继续往下看。根据贝叶斯公式 $ P(A|B)=\frac{P(B|A)P(A)}{P(B)}$，并按照贝叶斯公式形式将$  P(\Theta|i {&gt;}_{u}j)$ 变化下，得到：</p>
+<script type="math/tex; mode=display">
+P(\Theta|i{>}_{u}j)=\frac{P(i{>}_{u}j|\Theta)P(\Theta)}{P(i{>}_{u}j)}</script><p>其中对任意一个用户 u 来说，偏好排序 $i{&gt;}_{u}j$ 都是固定的，故后验概率 $ P(\Theta|i{&gt;}_{u}j)$ 可由似然函数 $P(i{&gt;}_{u}j|\Theta)$ 与 先验概率 $P(\Theta) $ 决定。（对于$ P(x|\Theta)$， 若x为确定的，$\Theta$ 为变量，则称作似然函数，反之为概率函数）</p>
+<script type="math/tex; mode=display">
+P(\Theta|i{>}_{u}j)\propto{P(i{>}_{u}j|\Theta)P(\Theta)}</script><h3 id="3-1-似然函数-P-i-gt-u-j-Theta"><a href="#3-1-似然函数-P-i-gt-u-j-Theta" class="headerlink" title="3.1 似然函数 $P(i{&gt;}_{u}j|\Theta)$"></a>3.1 似然函数 $P(i{&gt;}_{u}j|\Theta)$</h3><p>​    我们首先分析似然函数 $P(i{&gt;}_{u}j|\Theta)$ ，在论文中，作者将似然函数简写为：</p>
+<script type="math/tex; mode=display">
+P(i{>}_{u}j|\Theta) = \sigma(\hat{x}_{uij}(\Theta))</script><p>其中 $ \sigma=sigmoid(x)$ ，从Figure 1我们能看出 sigmoid 函数能将函数值压缩到 0-1 间，从而映射为概率。$\hat{x}_{uij}(\Theta)$ 是关于 $\Theta$ 的一个函数，目的是保证在三元组 <u,i,j> 中，用户 u 在 物品 i,j 中更喜欢 i。文章为了简化，将参数 $\Theta$ 移除了该函数，并做了如下定义 $ \hat{x}_{uij}=\hat{x}_{ui}-\hat{x}_{uj}$ ($\hat{x}_{ui}$ 表示该系统预测下。用户 u 对物品 i 的评分。在该定义下，若用户 u 更喜欢物品 i，那么 $ \hat{x}_{ui} &gt; $$ \hat{x}_{uj}$ ，得到的评分函数 $ \hat{x}_{uij} &gt;0$，经过 sigmoid 后就会转换为一个大于0.5的概率值)，最终似然函数可化为：</u,i,j></p>
+<script type="math/tex; mode=display">
+P(i{>}_{u}j|\Theta)=\sigma(\hat{x}_{ui}-\hat{x}_{uj})</script><p>​    文章做了如下两个假设：</p>
+<p>​        1.假设所有用户的偏好行为 $ {&gt;}_{u}$ 是独立于其他人的</p>
+<p>​        2. 假设特定用户对每对物品排序 (i, j) 是独立于其他对的物品</p>
+<p>​    那么引入全部用户 U (假设有n个用户)，而不是单个特定用户 u 后，似然函数$P(i{&gt;}_{u}j|\Theta)$ 就化为：</p>
+<script type="math/tex; mode=display">
+P(i{>}_{u}j|\Theta)= P({>}_{u1},{>}_{u2}...,{>}_{un}|\Theta)=\prod_{u=1,2,..n}P({>}_{u}|\Theta)=\prod_{(u,i,j)\in O}\sigma(\hat{x}_{ui}-\hat{x}_{uj})</script><h3 id="3-2-先验概率-P-Theta"><a href="#3-2-先验概率-P-Theta" class="headerlink" title="3.2 先验概率 $\ P(\Theta) $"></a>3.2 先验概率 $\ P(\Theta) $</h3><p>​    文章将先验概率看作一个正态分布，满足 $ P(\Theta)\sim N(0,\lambda_{\theta} I)$ 为什么有个单位矩阵 $ I$ 呢，因为用户不止一个人，所以是高维的。如何将概率化成我们直接能计算的函数呢，这里我们需要用到N维正态分布的概率密度函数 $ p(x)=\frac{1}{(2\pi)^{n/2}|\sum|^{1/2}}e^{-\frac{1}{2}(X-u)^T\sum^{-1}(X-u)}$，故先验概率的概率密度函数变为：</p>
+<script type="math/tex; mode=display">
+P(\Theta)=\frac{|\lambda I|^2}{(2\pi)^{n/2}}e^{-\frac{1}{2}{\Theta}^T(\lambda_{\Theta} I)^{-1}\Theta}</script><h3 id="3-3-BPR-Loss-的推出"><a href="#3-3-BPR-Loss-的推出" class="headerlink" title="3.3 BPR  Loss 的推出"></a>3.3 BPR  Loss 的推出</h3><p>​    由于 <script type="math/tex">P(\Theta|i{>}_{u}j)\propto{P(i{>}_{u}j|\Theta)P(\Theta)}</script> 其中我们需要最大化似然函数 $P(i{&gt;}_{u}j|\Theta)$ ，因此才有文章中的希望最大化 $  P(\Theta|i {&gt;}_{u}j)$ ，由于似然函数中有连乘，故加上对数函数 ln，最终的优化目标为</p>
+<script type="math/tex; mode=display">
+max \ ln(P(\Theta)|i{>}_{u}j)\propto min \ -ln(P(i{>}_{u}j|\Theta)P(\Theta))</script><p>​    将 (6) (7) (8)带入进行计算：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+BPR-OPT &=min \ -ln(P(i{>}_{u}j|\Theta)*P(\Theta)) \\
+&=min \ -ln\prod_{(u,i,j) \in O}\sigma(\hat{x}_{ui}-\hat{x}_{uj}) -lnP(\Theta)\\
+&=min \ \sum_{(u,i,j)\in O}-ln\sigma(\hat{x}_{ui}-\hat{x}_{uj})-ln(\frac{|\lambda I|^2}{(2\pi)^{n/2}}e^{-\frac{1}{2}{\Theta}^T(\lambda_{\Theta} I)^{-1}\Theta})\\
+&=min \ \sum_{(u,i,j)\in O}-ln\sigma(\hat{x}_{ui}-\hat{x}_{uj})+\frac{\Vert\Theta \Vert_2^2}{2\lambda_\theta} \\
+&=min \ \sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2
+\end{align}</script><p>公式（13）眼熟吗，我再放上 BPR Loss: $ {Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2$ ，当令 $\lambda=\frac{1}{2\lambda_{\Theta}} $，BPR-OPT就变为了 BPR Loss。</p>
+<p>​    在推导最后的 BPR Loss 时我发现了论文中的一个小错误，论文中给出的结果是</p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/../public/images/image-20211010153633843.png" alt="image-20211010153633843"></p>
+<p>​                                          Figure 3: BPR 论文中对 BPR-OPT 的推导，其中 $ P(\theta) \sim N(0,\lambda_{\Theta}I)$</p>
+<p>但按照我们推导的来，最后正则项化系数 $\lambda=\frac{1}{2\lambda_{\Theta}}$，可在论文的推导中正则项系数 $\lambda=\lambda_{\Theta}$。不过因为直接使用最后一步的推导，且正则项系数为超参数，由人为设定，最终结果不受影响。</p>
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p>​    BPR Loss 来源于 BPR 论文中优化策略，论文中策略</p>
+<script type="math/tex; mode=display">
+BPR-OPT：max \ lnp(\Theta|{>}_{u})=max \ \sum_{(u,i,j)\in D_{s}}ln\sigma(\hat{x}_{uij})-\lambda_{\Theta} \Vert \Theta\Vert_2^2</script><p>然后对 BPR-OPT采用梯度上升。而 BPR Loss 则是加了负号的 BPR-OPT，采用梯度下降。所以 BPR Loss 的思想与 BPR-OPT 是一样的，都是在 (u,i,j) 这个三元组中，尽可能的扩大 (u,i) 与 (u,j) 间的距离，即让用户对正样本的评分更加大于对负样本的评分。</p>
+<p>​    最后给出 BPR Loss 的 Pytorch 实现：(BPR Loss: $ {Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2$ )</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bpr_loss</span>(<span class="params">users, pos_items, neg_items</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    :param users: 用户 u 的 ID</span></span><br><span class="line"><span class="string">    :param pos_items: 物品 i 的 ID</span></span><br><span class="line"><span class="string">    :param neg_items: 物品 j 的 ID</span></span><br><span class="line"><span class="string">    :return: BPR Lo</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    u_embedding = self.embedding_user(users)  <span class="comment"># user 的 embedding</span></span><br><span class="line">    i_embedding = self.embedding_item(pos_items)  <span class="comment"># iten i 的 embedding</span></span><br><span class="line">    j_embedding = self.embedding_item(neg_items)  <span class="comment"># item j 的 embedding</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># BPR Loss 前面部分</span></span><br><span class="line">    pos_scores = torch.<span class="built_in">sum</span>(torch.mul(u_embedding, i_embedding), dim=<span class="number">1</span>)  <span class="comment"># y_ui</span></span><br><span class="line">    neg_scores = torch.<span class="built_in">sum</span>(torch.mul(u_embedding, j_embedding), dim=<span class="number">1</span>)  <span class="comment"># y_uj</span></span><br><span class="line">    mf_loss = -torch.mean(torch.nn.functional.softplus(pos_scores - neg_scores))  <span class="comment"># -ln(pos-neg)</span></span><br><span class="line">	</span><br><span class="line">    <span class="comment"># BPR Loss 后面部分</span></span><br><span class="line">    emb_loss = u_embedding.norm(<span class="number">2</span>).<span class="built_in">pow</span>(<span class="number">2</span>) + i_embedding.norm(<span class="number">2</span>).<span class="built_in">pow</span>(<span class="number">2</span>) + j_embedding.norm(<span class="number">2</span>).<span class="built_in">pow</span>(<span class="number">2</span>)</span><br><span class="line">    emb_loss = weight_decay * emb_loss <span class="comment">#  weight_decay 为正则项系数 lambda</span></span><br><span class="line"></span><br><span class="line">    loss = mf_loss + emb_loss</span><br><span class="line">    <span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
+<h1 id="5-Reference"><a href="#5-Reference" class="headerlink" title="5. Reference"></a>5. Reference</h1><p>[1] <a target="_blank" rel="noopener" href="https://dblp.org/pid/67/5601.html">Steffen Rendle</a>, <a target="_blank" rel="noopener" href="https://dblp.org/pid/72/8024.html">Christoph Freudenthaler</a>, <a target="_blank" rel="noopener" href="https://dblp.org/pid/69/6339.html">Zeno Gantner</a>, <a target="_blank" rel="noopener" href="https://dblp.org/pid/s/LarsSchmidtThieme.html">Lars Schmidt-Thieme</a>:<br><strong>BPR: Bayesian Personalized Ranking from Implicit Feedback.</strong> <a target="_blank" rel="noopener" href="https://dblp.org/db/conf/uai/uai2009.html#RendleFGS09">UAI 2009</a>: 452-461</p>
+<p>[2] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/387378387">小白必看：一文读懂推荐系统负采样</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://blog.csdn.net/u011508640/article/details/72815981">详解最大似然估计（MLE）、最大后验概率估计（MAP），以及贝叶斯公式的理解</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26614750">一文搞懂极大似然估计</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32685118">贝叶斯眼里的正则化</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiangzongyi.github.io/2021/10/08/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="向宗义的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/10/08/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-08T19:35:04+08:00">
+                2021-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">向宗义</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

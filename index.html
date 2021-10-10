@@ -8,6 +8,9 @@
 <html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
+<link rel="dns-prefetch" href="//cdn.bootcss.com" />
+<link rel="dns-prefetch" href="//cdn.mathjax.org" />
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -136,8 +139,6 @@
 
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/09/BRP-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -255,7 +256,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/10/09/BRP-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/" itemprop="url">BRP Loss 的由来</a></h1>
+                <a class="post-title-link" href="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/" itemprop="url">BRP Loss 的由来</a></h1>
         
 
         <div class="post-meta">
@@ -310,7 +311,7 @@
             <h1 id="BPR-Loss"><a href="#BPR-Loss" class="headerlink" title="BPR Loss"></a>BPR Loss</h1><p>​    BPR Loss 作为推荐系统中常用的 loss，我在之前却只知道形式而不知道它的由来。在读完论文 <a target="_blank" rel="noopener" href="https://arxiv.org/ftp/arxiv/papers/1205/1205.2618.pdf">BPR: Bayesian Personalized Ranking from Implicit Feedback</a> 后恍然大悟，故在这里记录自己的理解。</p>
 <p>​    先放上 BPR Loss 的形式以及里面符号的含义：</p>
 <script type="math/tex; mode=display">
-{Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2</script><p>​    其中 $\ O=\left{(u,i,j)|(u,i) \in {R}^{+},(u,j) \in {R}^{-} \right}  $，$\ R^{+}$表示的是 user 与 item 有交互的集合，$\ R^{-}$ 表示 user 与 item 未交互的集合，例如张三买了新键盘，但没买显示器，那么 $\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$。</p>
+{Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2</script><p>​    其中 $ (O=\left{(u,i,j)|(u,i) \in {R}^{+},(u,j) \in {R}^{-} \right}) $，$\ R^{+}$表示的是 user 与 item 有交互的集合，$\ R^{-}$ 表示 user 与 item 未交互的集合，例如张三买了新键盘，但没买显示器，那么 $\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$。</p>
 <p>​    $\ \sigma$ 是sigmoid函数，形式为 $\ sigmoid(x)=\frac{1}{1+exp(-x)}$, 函数图形如下图显示，可以发现值域在0和1之间，并且为单调递增函数。</p>
 <p><img src="../../img/image-20211009165701143.png" alt="image-20211009165701143"></p>
 <p>​                                                                           <em>Figure 1: Sigmoid 的图像</em> </p>

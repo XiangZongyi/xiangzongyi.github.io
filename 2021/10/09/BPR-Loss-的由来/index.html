@@ -91,9 +91,11 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211009165701143.png">
 <meta property="og:image" content="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211009185756496.png">
+<meta property="og:image" content="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/%E5%95%86%E5%93%81%E5%9B%BE%E7%89%87.png">
+<meta property="og:image" content="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/%E5%81%8F%E5%A5%BD%E5%9B%BE%E7%89%87.png">
 <meta property="og:image" content="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211010153633843.png">
 <meta property="article:published_time" content="2021-10-09T02:36:01.000Z">
-<meta property="article:modified_time" content="2021-10-11T03:59:30.578Z">
+<meta property="article:modified_time" content="2021-10-11T07:00:42.213Z">
 <meta property="article:author" content="向宗义">
 <meta property="article:tag" content="推荐系统">
 <meta name="twitter:card" content="summary">
@@ -356,7 +358,11 @@
 <p>​    在隐式反馈中有个问题，就是只有正样本才能被观察到，剩下的未被观察的（未交互的）数据混合着潜在的正样本和负样本。如果忽略掉未被观察到的样本，那么典型的机器学习方法将学不到任何东西（因为其不能区分正负样本）。所以一个策略是从未被观察到的数据中，采取一部分的样本作为负样本，该方法被称作负采样 (Negative Sampling)。</p>
 <p>​    再引用张三买键盘的例子，我们有$\ (张三，键盘) \in R^{+}, (张三，显示器) \in R^{-}$，其中张三买了键盘，张三与键盘有交互，故集合 $\ R^{+}$ 为观察到的正样本；张三没有购买显示器，张三与显示器没有交互，故集合 $\ R^{-}$ 为未观察到的样本，从 $ R^{-}$ 中采样出来的样本，被称为负样本。负样本的采集方法也是推荐系统中的一个重要研究分支，感兴趣的朋友们可以看看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/387378387">小白必看：一文读懂推荐系统负采样</a>。</p>
 <h3 id="2-2-Personalized-Ranking"><a href="#2-2-Personalized-Ranking" class="headerlink" title="2.2 Personalized Ranking"></a>2.2 Personalized Ranking</h3><p>​    讲完了隐式反馈，接下来讲讲什么是个性化排序 (Personalized Ranking) 。假设张三是一个程序员，他尤其喜欢电子设备，这时给了他四个物品：钢笔，键盘，显示器，拖把，其中张三对这四个物品的喜欢程度排序为：键盘&gt;显示器&gt;钢笔&gt;拖把。</p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/%E5%95%86%E5%93%81%E5%9B%BE%E7%89%87.png" alt="商品图片"></p>
+<p>​                                            <em>Figure 3: 所有商品的图片（图片来源： 百度图片</em></p>
 <p>​    如果将张三定义为 u, 钢笔，键盘，显示器和拖把分别定义为 i1, i2, i3, i4 。那么张三对这几个物品的偏好程度可以写为 $i2 {&gt;}_{u}i3{&gt;}_{u}i1{&gt;}_u{i4}$， 其中 $\ {&gt;}_{u} $ 表示在用户 u 下，对各个物品的偏好程度。这种对特定的用户，有着特定的物品偏好排序，就叫做 personalized ranking。</p>
+<p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/%E5%81%8F%E5%A5%BD%E5%9B%BE%E7%89%87.png" alt="偏好图片" style="zoom:80%;"></p>
+<p>​                                                    <em>Figure 4: 将所有商品的图片进行偏好排序</em></p>
 <h1 id="3-由贝叶斯公式推导-BPR-Loss"><a href="#3-由贝叶斯公式推导-BPR-Loss" class="headerlink" title="3. 由贝叶斯公式推导 BPR Loss"></a>3. 由贝叶斯公式推导 BPR Loss</h1><p>​    接下来就进入核心部分，也是能将 BPR Loss 推导出来的部分。给定一个用户 u ，物品  i, j 且$ (u,i) \in {R}^{+},(u,j) \in {R}^{-} $。那么我们对于要训练的参数 $ \Theta $ ，我们希望能最大化 $  P(\Theta|i {&gt;}_{u}j)$，为什么要最大化这个概率函数呢？我们继续往下看。根据贝叶斯公式 $ P(A|B)=\frac{P(B|A)P(A)}{P(B)}$，并按照贝叶斯公式形式将$  P(\Theta|i {&gt;}_{u}j)$ 变化下，得到：</p>
 <script type="math/tex; mode=display">
 P(\Theta|i{>}_{u}j)=\frac{P(i{>}_{u}j|\Theta)P(\Theta)}{P(i{>}_{u}j)}</script><p>其中对任意一个用户 u 来说，偏好排序 $i{&gt;}_{u}j$ 都是固定的，故后验概率 $ P(\Theta|i{&gt;}_{u}j)$ 可由似然函数 $P(i{&gt;}_{u}j|\Theta)$ 与 先验概率 $P(\Theta) $ 决定。（对于$ P(x|\Theta)$， 若x为确定的，$\Theta$ 为变量，则称作似然函数，反之为概率函数）</p>
@@ -385,7 +391,7 @@ BPR-OPT &=min \ -ln(P(i{>}_{u}j|\Theta)*P(\Theta)) \\
 \end{align}</script><p>推出的公式眼熟吗，我再放上 BPR Loss: $ {Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2$ ，当令 $\lambda=\frac{1}{2\lambda_{\Theta}} $，BPR-OPT就变为了 BPR Loss。</p>
 <p>​    在推导最后的 BPR Loss 时我发现了论文中的一个小错误，论文中给出的结果是</p>
 <p><img src="/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211010153633843.png" alt="image-20211010153633843"></p>
-<p>​                                          Figure 3: BPR 论文中对 BPR-OPT 的推导，其中 $ P(\theta) \sim N(0,\lambda_{\Theta}I)$</p>
+<p>​                                          Figure : BPR 论文中对 BPR-OPT 的推导，其中 $ P(\theta) \sim N(0,\lambda_{\Theta}I)$</p>
 <p>但按照我们推导的来，最后正则项化系数 $\lambda=\frac{1}{2\lambda_{\Theta}}$，可在论文的推导中正则项系数 $\lambda=\lambda_{\Theta}$。不过因为直接使用最后一步的推导，且正则项系数为超参数，由人为设定，最终结果不受影响。</p>
 <h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p>​    BPR Loss 来源于 BPR 论文中优化策略，论文中策略</p>
 <script type="math/tex; mode=display">

@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211009185756496.png">
 <meta property="og:image" content="http://xiangzongyi.github.io/2021/10/09/BPR-Loss-%E7%9A%84%E7%94%B1%E6%9D%A5/image-20211010153633843.png">
 <meta property="article:published_time" content="2021-10-09T02:36:01.000Z">
-<meta property="article:modified_time" content="2021-10-11T01:58:54.802Z">
+<meta property="article:modified_time" content="2021-10-11T03:59:30.578Z">
 <meta property="article:author" content="向宗义">
 <meta property="article:tag" content="推荐系统">
 <meta name="twitter:card" content="summary">
@@ -372,14 +372,14 @@ P(i{>}_{u}j|\Theta)=\sigma(\hat{x}_{ui}-\hat{x}_{uj})</script><p>​    文章�
 <script type="math/tex; mode=display">
 P(i{>}_{u}j|\Theta)= P({>}_{u1},{>}_{u2}...,{>}_{un}|\Theta)=\prod_{u=1,2,..n}P({>}_{u}|\Theta)=\prod_{(u,i,j)\in O}\sigma(\hat{x}_{ui}-\hat{x}_{uj})</script><h3 id="3-2-先验概率-P-Theta"><a href="#3-2-先验概率-P-Theta" class="headerlink" title="3.2 先验概率 $\ P(\Theta) $"></a>3.2 先验概率 $\ P(\Theta) $</h3><p>​    文章将先验概率看作一个正态分布，满足 $ P(\Theta)\sim N(0,\lambda_{\theta} I)$ 为什么有个单位矩阵 $ I$ 呢，因为用户不止一个人，所以是高维的。如何将概率化成我们直接能计算的函数呢，这里我们需要用到N维正态分布的概率密度函数 $ p(x)=\frac{1}{(2\pi)^{n/2}|\sum|^{1/2}}e^{-\frac{1}{2}(X-u)^T\sum^{-1}(X-u)}$，故先验概率的概率密度函数变为：</p>
 <script type="math/tex; mode=display">
-P(\Theta)=\frac{|\lambda I|^2}{(2\pi)^{n/2}}e^{-\frac{1}{2}{\Theta}^T(\lambda_{\Theta} I)^{-1}\Theta}</script><h3 id="3-3-BPR-Loss-的推出"><a href="#3-3-BPR-Loss-的推出" class="headerlink" title="3.3 BPR  Loss 的推出"></a>3.3 BPR  Loss 的推出</h3><p>​    由于 <script type="math/tex">P(\Theta|i{>}_{u}j)\propto{P(i{>}_{u}j|\Theta)P(\Theta)}</script> 其中我们需要最大化似然函数 $P(i{&gt;}_{u}j|\Theta)$ ，因此才有文章中的希望最大化 $  P(\Theta|i {&gt;}_{u}j)$ ，由于似然函数中有连乘，故加上对数函数 ln，最终的优化目标为</p>
+P(\Theta)=\frac{|\lambda_{\Theta} I|^2}{(2\pi)^{n/2}}e^{-\frac{1}{2}{\Theta}^T(\lambda_{\Theta} I)^{-1}\Theta}</script><h3 id="3-3-BPR-Loss-的推出"><a href="#3-3-BPR-Loss-的推出" class="headerlink" title="3.3 BPR  Loss 的推出"></a>3.3 BPR  Loss 的推出</h3><p>​    由于 <script type="math/tex">P(\Theta|i{>}_{u}j)\propto{P(i{>}_{u}j|\Theta)P(\Theta)}</script> 其中我们需要最大化似然函数 $P(i{&gt;}_{u}j|\Theta)$ ，因此才有文章中的希望最大化 $  P(\Theta|i {&gt;}_{u}j)$ ，由于似然函数中有连乘，故加上对数函数 ln，最终的优化目标为</p>
 <script type="math/tex; mode=display">
 max \ ln(P(\Theta)|i{>}_{u}j)\propto min \ -ln(P(i{>}_{u}j|\Theta)P(\Theta))</script><p>​    将上述三个公式带入进行计算：</p>
 <script type="math/tex; mode=display">
 \begin{align}
 BPR-OPT &=min \ -ln(P(i{>}_{u}j|\Theta)*P(\Theta)) \\
 &=min \ -ln\prod_{(u,i,j) \in O}\sigma(\hat{x}_{ui}-\hat{x}_{uj}) -lnP(\Theta)\\
-&=min \ \sum_{(u,i,j)\in O}-ln\sigma(\hat{x}_{ui}-\hat{x}_{uj})-ln(\frac{|\lambda I|^2}{(2\pi)^{n/2}}e^{-\frac{1}{2}{\Theta}^T(\lambda_{\Theta} I)^{-1}\Theta})\\
+&=min \ \sum_{(u,i,j)\in O}-ln\sigma(\hat{x}_{ui}-\hat{x}_{uj})-ln(\frac{|\lambda_{\Theta} I|^2}{(2\pi)^{n/2}}e^{-\frac{1}{2}{\Theta}^T(\lambda_{\Theta} I)^{-1}\Theta})\\
 &=min \ \sum_{(u,i,j)\in O}-ln\sigma(\hat{x}_{ui}-\hat{x}_{uj})+\frac{\Vert\Theta \Vert_2^2}{2\lambda_\theta} \\
 &=min \ \sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2
 \end{align}</script><p>推出的公式眼熟吗，我再放上 BPR Loss: $ {Loss}_{bpr}=\sum_{(u,i,j)\in O}-\ln\sigma(\hat{y}_{ui}-\hat{y}_{uj})+\lambda \Vert {\Theta} \Vert_2^2$ ，当令 $\lambda=\frac{1}{2\lambda_{\Theta}} $，BPR-OPT就变为了 BPR Loss。</p>
